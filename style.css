@@ -1,6 +1,7 @@
 :root {
-  --primary-color: #413c58;
-  --secondary-color: #f2e7c9;
+  --primary-color: white;
+  --secondary-color: #412854;
+  --background-color: white;
 }
 
 * {
@@ -48,7 +49,7 @@ header .add-book .material-symbols-outlined {
 
 .main-container {
   flex: 10;
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   display: flex;
   padding: 25px;
   gap: 25px;
@@ -58,7 +59,11 @@ header .add-book .material-symbols-outlined {
 }
 
 .main-container .book-card {
-  border: 2px solid red;
+  color: #412854;
+  border-radius: 8px;
+  border: 4px solid #412854;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   height: 350px;
   width: 325px;
 }
