@@ -7,6 +7,7 @@
 * {
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 
 body {
@@ -153,6 +154,15 @@ header #add-book .material-symbols-outlined {
   font-size: 28px;
 }
 
+.book-delete {
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
+  align-self: start;
+  justify-self: end;
+  cursor: pointer;
+  caret-color: transparent;
+}
+
 .book-author {
   grid-column: 1 / 5;
   grid-row: 2 / 3;
@@ -175,7 +185,7 @@ header #add-book .material-symbols-outlined {
   grid-column: 2 / 3;
   grid-row: 4 / 5;
   align-self: end;
-  margin-left: 20px;
+  margin-left: 30px;
   font-size: 18px;
 }
 
@@ -190,6 +200,12 @@ header #add-book .material-symbols-outlined {
   grid-row: 4 / 5;
   align-self: end;
   justify-self: end;
+  cursor: pointer;
+  caret-color: transparent;
+}
+
+.book-favorite-enabled {
+  color: goldenrod;
 }
 
 .book-card .material-symbols-outlined {
