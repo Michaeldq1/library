@@ -1,17 +1,27 @@
 "use strict";
 
-const bookList = [];
+const bookList = JSON.parse(window.localStorage.getItem("bookList") || []);
 const addBookButton = document.getElementById("add-book");
 const addBookModal = document.getElementById("add-book-modal");
-const submitBook = document.getElementById("submit-book");
+const submitBookButton = document.getElementById("submit-book");
 const bookListContainer = document.getElementById("main-container");
+const header = document.getElementById("header");
+const footer = document.getElementById("footer");
 const closeModalButton = document.getElementById("close-modal");
+
+window.addEventListener("load", (event) => {
+  renderBookCards();
+});
 
 addBookButton.addEventListener("click", (event) => {
   addBookModal.style.display = "block";
+  bookListContainer.style.display = "none";
+  header.style.display = "none";
+  footer.style.display = "none";
+  console.log(bookList);
 });
 
-submitBook.addEventListener("click", (event) => {
+submitBookButton.addEventListener("click", (event) => {
   const book = {};
   const bookTitle = document.getElementById("modal-input-title");
   const bookAuthor = document.getElementById("modal-input-author");
@@ -22,8 +32,13 @@ submitBook.addEventListener("click", (event) => {
   book.author = bookAuthor.value;
   book.genre = bookGenre.value;
   book.pages = bookPages.value;
+  book.favorite = false;
 
   addBookModal.style.display = "none";
+  bookListContainer.style.display = "flex";
+  header.style.display = "flex";
+  footer.style.display = "flex";
+
   bookList.push(book);
   bookListContainer.innerHTML = "";
 
@@ -35,6 +50,8 @@ submitBook.addEventListener("click", (event) => {
   bookAuthor.value = "";
   bookGenre.value = "";
   bookPages.value = "";
+
+  window.localStorage.setItem("bookList", JSON.stringify(bookList));
 });
 
 function renderBookCards() {
@@ -45,6 +62,18 @@ function renderBookCards() {
     const bookTitle = document.createElement("div");
     bookTitle.classList.add("book-title");
     bookTitle.textContent = book.title;
+
+    const bookDelete = document.createElement("span");
+    bookDelete.classList.add("material-symbols-outlined");
+    bookDelete.classList.add("book-delete");
+    bookDelete.textContent = "delete";
+
+    bookDelete.addEventListener("click", (event) => {
+      bookList.splice(bookList.indexOf(book), 1);
+      bookListContainer.innerHTML = "";
+      renderBookCards();
+      window.localStorage.setItem("bookList", JSON.stringify(bookList));
+    });
 
     const bookAuthor = document.createElement("div");
     bookAuthor.classList.add("book-author");
@@ -73,12 +102,23 @@ function renderBookCards() {
     bookFavorite.classList.add("book-favorite");
     bookFavorite.textContent = "star";
 
+    bookFavorite.addEventListener("click", (event) => {
+      if (!book.favorite) {
+        book.favorite = true;
+      } else {
+        book.favorite = false;
+      }
+
+      bookFavorite.classList.toggle("book-favorite-enabled");
+    });
+
     bookCard.appendChild(bookTitle);
     bookCard.appendChild(bookAuthor);
     bookCard.appendChild(bookGenre);
     bookCard.appendChild(bookPagesIcon);
     bookCard.appendChild(bookPages);
     bookCard.appendChild(bookRead);
+    bookCard.appendChild(bookDelete);
     bookCard.appendChild(bookFavorite);
     bookListContainer.appendChild(bookCard);
   }
