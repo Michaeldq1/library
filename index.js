@@ -127,7 +127,12 @@ function renderBookCards(array) {
     const bookRead = document.createElement("span");
     bookRead.classList.add("material-symbols-outlined");
     bookRead.classList.add("book-read");
-    bookRead.textContent = "cancel";
+    if (book.read) {
+      bookRead.classList.add("book-read-enabled");
+      bookRead.textContent = "check_circle";
+    } else {
+      bookRead.textContent = "cancel";
+    }
 
     bookRead.addEventListener("click", (event) => {
       if (!book.read) {
@@ -146,16 +151,18 @@ function renderBookCards(array) {
     bookFavorite.classList.add("material-symbols-outlined");
     bookFavorite.classList.add("book-favorite");
     bookFavorite.textContent = "star";
+    if (book.favorite) {
+      bookFavorite.classList.add("book-favorite-enabled");
+    }
 
     bookFavorite.addEventListener("click", (event) => {
       if (!book.favorite) {
         book.favorite = true;
-        bookFavorite.classList.add("book-favorite-enabled");
       } else {
         book.favorite = false;
-        bookFavorite.classList.remove("book-favorite-enabled");
       }
 
+      bookFavorite.classList.toggle("book-favorite-enabled");
       window.localStorage.setItem("bookList", JSON.stringify(array));
     });
 
