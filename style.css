@@ -136,6 +136,7 @@ header #add-book .material-symbols-outlined {
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
+  width: 100px;
 }
 
 #main-container {
