@@ -5,19 +5,29 @@ const addBookButton = document.getElementById("add-book");
 const addBookModal = document.getElementById("add-book-modal");
 const submitBookButton = document.getElementById("submit-book");
 const bookListContainer = document.getElementById("main-container");
+const filterButtons = document.getElementById("filter-buttons");
+const favoriteBooksFilter = document.getElementById("filter-favorite");
 const header = document.getElementById("header");
 const footer = document.getElementById("footer");
 const closeModalButton = document.getElementById("close-modal");
 
 window.addEventListener("load", (event) => {
-  renderBookCards();
+  renderBookCards(bookList);
+});
+
+favoriteBooksFilter.addEventListener("click", () => {
+  const favoriteBooks = bookList.filter((book) => book.favorite === true);
+  bookListContainer.innerHTML = "";
+  renderBookCards(favoriteBooks);
 });
 
 addBookButton.addEventListener("click", (event) => {
   addBookModal.style.display = "block";
+  filterButtons.style.display = "none";
   bookListContainer.style.display = "none";
   header.style.display = "none";
   footer.style.display = "none";
+
   console.log(bookList);
 });
 
@@ -32,17 +42,19 @@ submitBookButton.addEventListener("click", (event) => {
   book.author = bookAuthor.value;
   book.genre = bookGenre.value;
   book.pages = bookPages.value;
+  book.read = false;
   book.favorite = false;
 
   addBookModal.style.display = "none";
   bookListContainer.style.display = "flex";
   header.style.display = "flex";
   footer.style.display = "flex";
+  filterButtons.style.display = "flex";
 
   bookList.push(book);
   bookListContainer.innerHTML = "";
 
-  renderBookCards();
+  renderBookCards(bookList);
   console.log(book);
   console.log(bookList);
 
@@ -54,8 +66,8 @@ submitBookButton.addEventListener("click", (event) => {
   window.localStorage.setItem("bookList", JSON.stringify(bookList));
 });
 
-function renderBookCards() {
-  for (const book of bookList) {
+function renderBookCards(array) {
+  for (const book of array) {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
 
@@ -71,8 +83,8 @@ function renderBookCards() {
     bookDelete.addEventListener("click", (event) => {
       bookList.splice(bookList.indexOf(book), 1);
       bookListContainer.innerHTML = "";
-      renderBookCards();
-      window.localStorage.setItem("bookList", JSON.stringify(bookList));
+      renderBookCards(array);
+      window.localStorage.setItem("bookList", JSON.stringify(array));
     });
 
     const bookAuthor = document.createElement("div");
@@ -95,7 +107,19 @@ function renderBookCards() {
     const bookRead = document.createElement("span");
     bookRead.classList.add("material-symbols-outlined");
     bookRead.classList.add("book-read");
-    bookRead.textContent = "check_circle";
+    bookRead.textContent = "cancel";
+
+    bookRead.addEventListener("click", (event) => {
+      if (!book.read) {
+        book.read = true;
+        bookRead.textContent = "check_circle";
+      } else {
+        book.read = false;
+        bookRead.textContent = "cancel";
+      }
+
+      bookRead.classList.toggle("book-read-enabled");
+    });
 
     const bookFavorite = document.createElement("span");
     bookFavorite.classList.add("material-symbols-outlined");
@@ -105,11 +129,13 @@ function renderBookCards() {
     bookFavorite.addEventListener("click", (event) => {
       if (!book.favorite) {
         book.favorite = true;
+        bookFavorite.classList.add("book-favorite-enabled");
       } else {
         book.favorite = false;
+        bookFavorite.classList.remove("book-favorite-enabled");
       }
 
-      bookFavorite.classList.toggle("book-favorite-enabled");
+      window.localStorage.setItem("bookList", JSON.stringify(array));
     });
 
     bookCard.appendChild(bookTitle);
@@ -126,4 +152,8 @@ function renderBookCards() {
 
 closeModalButton.addEventListener("click", (event) => {
   addBookModal.style.display = "none";
+  filterButtons.style.display = "flex";
+  bookListContainer.style.display = "flex";
+  header.style.display = "flex";
+  footer.style.display = "flex";
 });
