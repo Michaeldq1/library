@@ -6,12 +6,18 @@ const addBookModal = document.getElementById("add-book-modal");
 const submitBookButton = document.getElementById("submit-book");
 const bookListContainer = document.getElementById("main-container");
 const filterButtons = document.getElementById("filter-buttons");
+const allBooksFilter = document.getElementById("filter-all");
 const favoriteBooksFilter = document.getElementById("filter-favorite");
 const header = document.getElementById("header");
 const footer = document.getElementById("footer");
 const closeModalButton = document.getElementById("close-modal");
 
 window.addEventListener("load", (event) => {
+  renderBookCards(bookList);
+});
+
+allBooksFilter.addEventListener("click", () => {
+  bookListContainer.innerHTML = "";
   renderBookCards(bookList);
 });
 
