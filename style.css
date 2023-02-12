@@ -121,6 +121,23 @@ header #add-book .material-symbols-outlined {
   font-size: 35px;
 }
 
+.filter-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  gap: 65px;
+}
+
+.filter-buttons button {
+  background-color: white;
+  border: 3px solid var(--secondary-color);
+  color: var(--secondary-color);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 #main-container {
   flex: 10;
   background-color: var(--background-color);
@@ -163,6 +180,10 @@ header #add-book .material-symbols-outlined {
   caret-color: transparent;
 }
 
+.book-delete:hover {
+  color: red;
+}
+
 .book-author {
   grid-column: 1 / 5;
   grid-row: 2 / 3;
@@ -193,6 +214,11 @@ header #add-book .material-symbols-outlined {
   grid-column: 3 / 4;
   grid-row: 4 / 5;
   align-self: end;
+  cursor: pointer;
+}
+
+.book-read-enabled {
+  color: green;
 }
 
 .book-favorite {
