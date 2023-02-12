@@ -8,6 +8,8 @@ const bookListContainer = document.getElementById("main-container");
 const filterButtons = document.getElementById("filter-buttons");
 const allBooksFilter = document.getElementById("filter-all");
 const favoriteBooksFilter = document.getElementById("filter-favorite");
+const readBooksFilter = document.getElementById("filter-read");
+const unreadBooksFilter = document.getElementById("filter-unread");
 const header = document.getElementById("header");
 const footer = document.getElementById("footer");
 const closeModalButton = document.getElementById("close-modal");
@@ -22,9 +24,21 @@ allBooksFilter.addEventListener("click", () => {
 });
 
 favoriteBooksFilter.addEventListener("click", () => {
-  const favoriteBooks = bookList.filter((book) => book.favorite === true);
+  const favoriteBooks = bookList.filter((book) => book.favorite);
   bookListContainer.innerHTML = "";
   renderBookCards(favoriteBooks);
+});
+
+readBooksFilter.addEventListener("click", (event) => {
+  const readBooks = bookList.filter((book) => book.read);
+  bookListContainer.innerHTML = "";
+  renderBookCards(readBooks);
+});
+
+unreadBooksFilter.addEventListener("click", (event) => {
+  const unreadBooks = bookList.filter((book) => !book.read);
+  bookListContainer.innerHTML = "";
+  renderBookCards(unreadBooks);
 });
 
 addBookButton.addEventListener("click", (event) => {
@@ -125,6 +139,7 @@ function renderBookCards(array) {
       }
 
       bookRead.classList.toggle("book-read-enabled");
+      window.localStorage.setItem("bookList", JSON.stringify(array));
     });
 
     const bookFavorite = document.createElement("span");
