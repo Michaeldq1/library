@@ -121,7 +121,7 @@ header #add-book .material-symbols-outlined {
   font-size: 35px;
 }
 
-.filter-buttons {
+#filter-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,7 +129,7 @@ header #add-book .material-symbols-outlined {
   gap: 65px;
 }
 
-.filter-buttons button {
+#filter-buttons button {
   background-color: white;
   border: 3px solid var(--secondary-color);
   color: var(--secondary-color);
