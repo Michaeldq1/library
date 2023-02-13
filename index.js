@@ -10,6 +10,7 @@ const allBooksFilter = document.getElementById("filter-all");
 const favoriteBooksFilter = document.getElementById("filter-favorite");
 const readBooksFilter = document.getElementById("filter-read");
 const unreadBooksFilter = document.getElementById("filter-unread");
+const filterDisplay = document.getElementById("filter-display");
 const sortButton = document.getElementById("sort");
 const header = document.getElementById("header");
 const footer = document.getElementById("footer");
@@ -17,6 +18,16 @@ const closeModalButton = document.getElementById("close-modal");
 
 window.addEventListener("load", (event) => {
   renderBookCards(bookList);
+});
+
+filterDisplay.addEventListener("click", (event) => {
+  filterButtons.style.display =
+    filterButtons.style.display == "none" ? "flex" : "none";
+
+  filterDisplay.style.color =
+    filterDisplay.style.color == "var(--secondary-color)"
+      ? "goldenrod"
+      : "var(--secondary-color)";
 });
 
 allBooksFilter.addEventListener("click", () => {
@@ -64,10 +75,6 @@ unreadBooksFilter.addEventListener("click", (event) => {
 
 addBookButton.addEventListener("click", (event) => {
   addBookModal.style.display = "block";
-  filterButtons.style.display = "none";
-  bookListContainer.style.display = "none";
-  header.style.display = "none";
-  footer.style.display = "none";
 
   console.log(bookList);
 });
