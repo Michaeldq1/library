@@ -10,6 +10,7 @@ const allBooksFilter = document.getElementById("filter-all");
 const favoriteBooksFilter = document.getElementById("filter-favorite");
 const readBooksFilter = document.getElementById("filter-read");
 const unreadBooksFilter = document.getElementById("filter-unread");
+const sortButton = document.getElementById("sort");
 const header = document.getElementById("header");
 const footer = document.getElementById("footer");
 const closeModalButton = document.getElementById("close-modal");
@@ -19,24 +20,44 @@ window.addEventListener("load", (event) => {
 });
 
 allBooksFilter.addEventListener("click", () => {
+  allBooksFilter.classList.add("selected-filter");
+  favoriteBooksFilter.classList.remove("selected-filter");
+  readBooksFilter.classList.remove("selected-filter");
+  unreadBooksFilter.classList.remove("selected-filter");
+  sortButton.classList.remove("selected-filter");
   bookListContainer.innerHTML = "";
   renderBookCards(bookList);
 });
 
 favoriteBooksFilter.addEventListener("click", () => {
   const favoriteBooks = bookList.filter((book) => book.favorite);
+  favoriteBooksFilter.classList.add("selected-filter");
+  allBooksFilter.classList.remove("selected-filter");
+  readBooksFilter.classList.remove("selected-filter");
+  unreadBooksFilter.classList.remove("selected-filter");
+  sortButton.classList.remove("selected-filter");
   bookListContainer.innerHTML = "";
   renderBookCards(favoriteBooks);
 });
 
 readBooksFilter.addEventListener("click", (event) => {
   const readBooks = bookList.filter((book) => book.read);
+  favoriteBooksFilter.classList.remove("selected-filter");
+  allBooksFilter.classList.remove("selected-filter");
+  readBooksFilter.classList.add("selected-filter");
+  unreadBooksFilter.classList.remove("selected-filter");
+  sortButton.classList.remove("selected-filter");
   bookListContainer.innerHTML = "";
   renderBookCards(readBooks);
 });
 
 unreadBooksFilter.addEventListener("click", (event) => {
   const unreadBooks = bookList.filter((book) => !book.read);
+  favoriteBooksFilter.classList.remove("selected-filter");
+  allBooksFilter.classList.remove("selected-filter");
+  readBooksFilter.classList.remove("selected-filter");
+  unreadBooksFilter.classList.add("selected-filter");
+  sortButton.classList.remove("selected-filter");
   bookListContainer.innerHTML = "";
   renderBookCards(unreadBooks);
 });
@@ -49,6 +70,26 @@ addBookButton.addEventListener("click", (event) => {
   footer.style.display = "none";
 
   console.log(bookList);
+});
+
+sortButton.addEventListener("click", (event) => {
+  const sortedBooks = bookList.sort((a, b) => {
+    const titleA = a.title;
+    const titleB = b.title;
+    if (titleA > titleB) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+
+  favoriteBooksFilter.classList.remove("selected-filter");
+  allBooksFilter.classList.remove("selected-filter");
+  readBooksFilter.classList.remove("selected-filter");
+  unreadBooksFilter.classList.remove("selected-filter");
+  sortButton.classList.add("selected-filter");
+  bookListContainer.innerHTML = "";
+  renderBookCards(sortedBooks);
 });
 
 submitBookButton.addEventListener("click", (event) => {
