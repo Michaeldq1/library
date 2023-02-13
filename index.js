@@ -11,6 +11,8 @@ const favoriteBooksFilter = document.getElementById("filter-favorite");
 const readBooksFilter = document.getElementById("filter-read");
 const unreadBooksFilter = document.getElementById("filter-unread");
 const filterDisplay = document.getElementById("filter-display");
+const analyticsDisplay = document.getElementById("analytics-display");
+const statistics = document.getElementById("statistics");
 const sortButton = document.getElementById("sort");
 const header = document.getElementById("header");
 const footer = document.getElementById("footer");
@@ -26,6 +28,16 @@ filterDisplay.addEventListener("click", (event) => {
 
   filterDisplay.style.color =
     filterDisplay.style.color == "var(--secondary-color)"
+      ? "goldenrod"
+      : "var(--secondary-color)";
+});
+
+analyticsDisplay.addEventListener("click", (event) => {
+  statistics.style.display =
+    statistics.style.display == "none" ? "flex" : "none";
+
+  analyticsDisplay.style.color =
+    analyticsDisplay.style.color == "var(--secondary-color)"
       ? "goldenrod"
       : "var(--secondary-color)";
 });

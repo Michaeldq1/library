@@ -48,7 +48,6 @@ body {
 
 .add-book {
   flex: 1;
-  text-align: center;
 }
 
 #stats {
@@ -106,6 +105,7 @@ header {
   min-height: 95px;
   align-self: center;
   width: 100%;
+  align-items: center;
 }
 
 header .title {
@@ -124,6 +124,7 @@ header #header-icons {
   caret-color: transparent;
   margin-right: 32px;
   gap: 15px;
+  align-items: center;
 }
 
 header #add-book:hover {
@@ -133,6 +134,12 @@ header #add-book:hover {
 header #header-icons .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 800, "GRAD" 0, "opsz" 48;
   font-size: 35px;
+}
+
+#statistics {
+  display: none;
+  flex-direction: column;
+  position: relative;
 }
 
 #filter-buttons {
@@ -268,6 +275,10 @@ footer {
   min-height: 47px;
 }
 
-.filter-display {
+#filter-display {
+  color: var(--secondary-color);
+}
+
+#analytics-display {
   color: var(--secondary-color);
 }
