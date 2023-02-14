@@ -207,6 +207,7 @@ function renderBookCards(array) {
 
       bookRead.classList.toggle("book-read-enabled");
       window.localStorage.setItem("bookList", JSON.stringify(array));
+      renderStats();
     });
 
     const bookFavorite = document.createElement("span");
@@ -226,6 +227,7 @@ function renderBookCards(array) {
 
       bookFavorite.classList.toggle("book-favorite-enabled");
       window.localStorage.setItem("bookList", JSON.stringify(array));
+      renderStats();
     });
 
     bookCard.appendChild(bookTitle);
@@ -264,11 +266,15 @@ function renderStats() {
     return counter;
   }, 0);
 
+  const favoritesPercentage = isNaN((sumFavorites / sumBooks) * 100)
+    ? 0
+    : (sumFavorites / sumBooks) * 100;
+
+  const readPercentage = isNaN((totalRead / sumBooks) * 100)
+    ? 0
+    : (totalRead / sumBooks) * 100;
+
   totalBooks.textContent = `Number of Books: ${sumBooks}`;
-  totalFavorites.textContent = `Favorites: ${sumFavorites} (${
-    (sumFavorites / sumBooks) * 100
-  }%)`;
-  totalBooksRead.textContent = `Books Read: ${totalRead} (${
-    (totalRead / sumBooks) * 100
-  }%)`;
+  totalFavorites.textContent = `Favorites: ${sumFavorites} (${favoritesPercentage}%)`;
+  totalBooksRead.textContent = `Books Read: ${totalRead} (${readPercentage}%)`;
 }
