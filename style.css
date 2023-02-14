@@ -106,12 +106,13 @@ header {
   align-self: center;
   width: 100%;
   align-items: center;
+  gap: 250px;
 }
 
 header .title {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   font-size: 35px;
   margin-left: 32px;
 }
@@ -119,7 +120,7 @@ header .title {
 header #header-icons {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   cursor: pointer;
   caret-color: transparent;
   margin-right: 32px;
