@@ -163,7 +163,7 @@ header #header-icons .material-symbols-outlined {
 }
 
 .selected-filter {
-  background-color: var(--secondary-color);
+  background-color: goldenrod;
   color: var(--primary-color);
 }
 
