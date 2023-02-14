@@ -17,9 +17,13 @@ const sortButton = document.getElementById("sort");
 const header = document.getElementById("header");
 const footer = document.getElementById("footer");
 const closeModalButton = document.getElementById("close-modal");
+const totalBooks = document.getElementById("total-books");
+const totalFavorites = document.getElementById("total-favorites");
+const totalBooksRead = document.getElementById("total-read");
 
 window.addEventListener("load", (event) => {
   renderBookCards(bookList);
+  renderStats();
 });
 
 filterDisplay.addEventListener("click", (event) => {
@@ -87,8 +91,6 @@ unreadBooksFilter.addEventListener("click", (event) => {
 
 addBookButton.addEventListener("click", (event) => {
   addBookModal.style.display = "block";
-
-  console.log(bookList);
 });
 
 sortButton.addEventListener("click", (event) => {
@@ -135,8 +137,7 @@ submitBookButton.addEventListener("click", (event) => {
   bookListContainer.innerHTML = "";
 
   renderBookCards(bookList);
-  console.log(book);
-  console.log(bookList);
+  renderStats();
 
   bookTitle.value = "";
   bookAuthor.value = "";
@@ -165,6 +166,7 @@ function renderBookCards(array) {
       bookListContainer.innerHTML = "";
       renderBookCards(array);
       window.localStorage.setItem("bookList", JSON.stringify(array));
+      renderStats();
     });
 
     const bookAuthor = document.createElement("div");
@@ -245,3 +247,28 @@ closeModalButton.addEventListener("click", (event) => {
   header.style.display = "flex";
   footer.style.display = "flex";
 });
+
+function renderStats() {
+  const sumBooks = bookList.reduce((counter, book) => {
+    if (book) counter += 1;
+    return counter;
+  }, 0);
+
+  const sumFavorites = bookList.reduce((counter, book) => {
+    if (book.favorite === true) counter += 1;
+    return counter;
+  }, 0);
+
+  const totalRead = bookList.reduce((counter, book) => {
+    if (book.read === true) counter += 1;
+    return counter;
+  }, 0);
+
+  totalBooks.textContent = `Number of Books: ${sumBooks}`;
+  totalFavorites.textContent = `Favorites: ${sumFavorites} (${
+    (sumFavorites / sumBooks) * 100
+  }%)`;
+  totalBooksRead.textContent = `Books Read: ${totalRead} (${
+    (totalRead / sumBooks) * 100
+  }%)`;
+}
