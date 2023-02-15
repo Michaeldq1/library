@@ -44,10 +44,12 @@ body {
   display: flex;
   width: 100%;
   font-size: 24px;
+  justify-content: center;
 }
 
 .add-book {
   flex: 1;
+  text-align: center;
 }
 
 #stats {
@@ -58,7 +60,7 @@ body {
 #close-modal {
   width: 5px;
   position: relative;
-  bottom: 20px;
+  bottom: 25px;
   text-align: end;
   cursor: pointer;
   caret-color: transparent;
@@ -79,6 +81,10 @@ body {
 .modal-input input {
   flex: 1;
   margin-right: 30px;
+  background-color: var(--secondary-color);
+  border-style: none;
+  border: 2px solid var(--primary-color);
+  border-radius: 4px;
 }
 
 button {
@@ -90,6 +96,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 14px;
 }
 
 header,
@@ -140,7 +147,6 @@ header #header-icons .material-symbols-outlined {
 #statistics {
   display: none;
   flex-direction: column;
-  position: relative;
 }
 
 #filter-buttons {
@@ -282,4 +288,9 @@ footer {
 
 #analytics-display {
   color: var(--secondary-color);
+}
+
+.disable-button {
+  pointer-events: none;
+  opacity: 0.5;
 }

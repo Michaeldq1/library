@@ -21,6 +21,11 @@ const totalBooks = document.getElementById("total-books");
 const totalFavorites = document.getElementById("total-favorites");
 const totalBooksRead = document.getElementById("total-read");
 
+const bookTitle = document.getElementById("modal-input-title");
+const bookAuthor = document.getElementById("modal-input-author");
+const bookGenre = document.getElementById("modal-input-genre");
+const bookPages = document.getElementById("modal-input-pages");
+
 window.addEventListener("load", (event) => {
   renderBookCards(bookList);
   renderStats();
@@ -91,6 +96,7 @@ unreadBooksFilter.addEventListener("click", (event) => {
 
 addBookButton.addEventListener("click", (event) => {
   addBookModal.style.display = "block";
+  formFieldCheck();
 });
 
 sortButton.addEventListener("click", (event) => {
@@ -115,10 +121,6 @@ sortButton.addEventListener("click", (event) => {
 
 submitBookButton.addEventListener("click", (event) => {
   const book = {};
-  const bookTitle = document.getElementById("modal-input-title");
-  const bookAuthor = document.getElementById("modal-input-author");
-  const bookGenre = document.getElementById("modal-input-genre");
-  const bookPages = document.getElementById("modal-input-pages");
 
   book.title = bookTitle.value;
   book.author = bookAuthor.value;
@@ -248,6 +250,10 @@ closeModalButton.addEventListener("click", (event) => {
   bookListContainer.style.display = "flex";
   header.style.display = "flex";
   footer.style.display = "flex";
+  bookTitle.value = "";
+  bookAuthor.value = "";
+  bookGenre.value = "";
+  bookPages.value = "";
 });
 
 function renderStats() {
@@ -277,4 +283,31 @@ function renderStats() {
   totalBooks.textContent = `Number of Books: ${sumBooks}`;
   totalFavorites.textContent = `Favorites: ${sumFavorites} (${favoritesPercentage}%)`;
   totalBooksRead.textContent = `Books Read: ${totalRead} (${readPercentage}%)`;
+}
+
+bookTitle.addEventListener("keydown", () => {
+  formFieldCheck();
+});
+
+bookAuthor.addEventListener("keydown", () => {
+  formFieldCheck();
+});
+
+bookGenre.addEventListener("keydown", () => {
+  formFieldCheck();
+});
+
+bookPages.addEventListener("keydown", () => {
+  formFieldCheck();
+});
+
+function formFieldCheck() {
+  if (
+    bookTitle.value !== "" &&
+    bookAuthor.value !== "" &&
+    bookGenre.value !== "" &&
+    bookPages.value !== ""
+  ) {
+    submitBookButton.classList.remove("disable-button");
+  } else submitBookButton.classList.add("disable-button");
 }
