@@ -17,10 +17,10 @@
     <title>Library</title>
   </head>
   <body>
-    <div id="add-book-modal">
+    <div id="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <div class="add-book">Add Book</div>
+          <div class="modal-title">Add Book</div>
           <span id="close-modal" class="material-symbols-outlined">
             close
           </span>
@@ -58,7 +58,7 @@
         <div class="modal-input">
           <div class="modal-input-name">Pages</div>
           <input
-            type="text"
+            type="number"
             name="pages"
             class="modal-input-text"
             id="modal-input-pages"
@@ -66,7 +66,7 @@
           />
         </div>
         <div>
-          <button id="submit-book" class="disable-button">Submit</button>
+          <button id="add-book-button" class="disable-button">Add</button>
         </div>
       </div>
     </div>
@@ -76,10 +76,10 @@
         <span class="material-symbols-outlined" id="add-book">
           add_circle
         </span>
-        <span class="material-symbols-outlined" id="filter-display">
+        <span class="material-symbols-outlined" id="filter-icon">
           filter_list
         </span>
-        <span class="material-symbols-outlined" id="analytics-display">
+        <span class="material-symbols-outlined" id="analytics-icon">
           analytics
         </span>
         <div id="statistics">
@@ -98,6 +98,8 @@
     </div>
     <div id="main-container"></div>
     <footer id="footer">by Michael Quinton</footer>
-    <script src="index.js"></script>
+    <script src="variables.js"></script>
+    <script src="functions.js"></script>
+    <script src="eventlisteners.js"></script>
   </body>
 </html>
