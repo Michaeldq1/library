@@ -24,3 +24,14 @@ const bookTitle = document.getElementById("modal-input-title");
 const bookAuthor = document.getElementById("modal-input-author");
 const bookGenre = document.getElementById("modal-input-genre");
 const bookPages = document.getElementById("modal-input-pages");
+
+class Book {
+  constructor(title, author, genre, pages, read, favorite) {
+    this.title = title;
+    this.author = author;
+    this.genre = genre;
+    this.pages = pages;
+    this.read = read;
+    this.favorite = favorite;
+  }
+}

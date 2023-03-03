@@ -201,14 +201,14 @@ function formFieldCheck() {
 }
 
 function createBook() {
-  const book = {};
-
-  book.title = bookTitle.value;
-  book.author = bookAuthor.value;
-  book.genre = bookGenre.value;
-  book.pages = bookPages.value;
-  book.read = false;
-  book.favorite = false;
+  let book = new Book(
+    bookTitle.value,
+    bookAuthor.value,
+    bookGenre.value,
+    bookPages.value,
+    false,
+    false
+  );
 
   addBookModal.style.display = "none";
   bookListContainer.style.display = "flex";
